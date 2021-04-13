@@ -1,25 +1,6 @@
---[[
+--[[ 
     Simulation of Paxos multi-proposer to show livelock
-
-    Fixed number (T.proposers) of proposers. 
-    Starting with T.acceptor acceptors, and increments by 2 each time until it reaches max 
-    Do{
-    Run T.rounds of the simulation
-    Each round has T.timeperround moves (one randomly chosen proposer attempting to advance)
-    There is a T.dropprob probability that the selected proposer can't communicate this move
-
-    If the proposer can move it contacts one previously not contacted
-    acceptor (unless it has struck out with all of them). If it is in phase 1 it looks for an acceptor to accept its
-    current id if it is in phase 2 it looks for an acceptor to approve its proposal
-    contacting one acceptor per move
-    }
-
-    Probability of livelock increases with T.dropprob (steeply) and with number of acceptors less steeply
-
-
-
-
-
+--
     (c) Victor Yodaiken 2016-2021.  Permission is hereby granted,
     free of charge,
     to any person obtaining a copy of this software and associated
@@ -38,7 +19,29 @@
     CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
     TORT OR OTHERWISE, ARISING FROM,
     OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-    THE SOFTWARE. ]]
+    THE SOFTWARE.
+
+
+
+    Simulation of Paxos multi-proposer to show livelock
+    Parameters are in the editable T data structure
+
+    Fixed number (T.proposers) of proposers. 
+    Starting with T.acceptor acceptors, and increments by 2 each time until it reaches max 
+    Do{
+    Run T.rounds of the simulation
+    Each round has T.timeperround moves (one randomly chosen proposer attempting to advance)
+    There is a T.dropprob probability that the selected proposer can't communicate this move
+
+    If the proposer can move it contacts one previously not contacted
+    acceptor (unless it has struck out with all of them). If it is in phase 1 it looks for an acceptor to accept its
+    current id if it is in phase 2 it looks for an acceptor to approve its proposal
+    contacting one acceptor per move
+    }
+
+    Probability of livelock increases with T.dropprob (steeply) and with number of acceptors less steeply
+
+    ]]
 
 
 -- local _ENV = require 'std.strict' (_G)
@@ -125,7 +128,8 @@ function stats (axes)
 	end
 	if fails == 1 then
 		    stat.failures = stat.failures + 1
-		    displayproposers ("consensus failure", axes)
+		    -- should never happen
+		    displayproposers ("safety failure", axes)
 		    end
 end
 
