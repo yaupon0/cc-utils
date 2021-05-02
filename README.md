@@ -7,4 +7,10 @@ The utility is presented as an include file with some static, inline, functions.
 
 **Paxos.lua** A simulator for Paxos that shows the livelock problem. 
 
+**markov.c**  A C version of the Lua Markov text generator. Completely useless, although it does show off C generics
+**include/dlinklist.h** A generic C double linked list (see use of sed in Makefile). 
+**include/mmaloc.h** Malloc with exit on fail so callers don't have to check the result - for when malloc failures are non recoverable. 
+**include/hash.h** some standard hash functions plus a variant needed for the markov program
+
+
 
